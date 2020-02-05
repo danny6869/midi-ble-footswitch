@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "config.h"
 #include "LEDAnimation.h"
 #include "MidiController.h"
 #include "MidiButton.h"
@@ -78,7 +79,7 @@ void MidiController::loop()
       expressionPedalList[i]->handleState();
     }
 
-    delay(50);
+    delay(DELAY_TIME_BETWEEN_INPUT_SCANS);
   }
 
 }

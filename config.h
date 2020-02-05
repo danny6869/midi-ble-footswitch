@@ -20,6 +20,9 @@
 #define LED_ON LOW
 #define LED_OFF HIGH
 
+// Delay time between input scans/reads (in ms)...
+#define DELAY_TIME_BETWEEN_INPUT_SCANS	50
+
 // Bootup animation delay in ms (lower number makes the animations faster...
 #define BOOTUP_ANIMATION_DELAY 150
 #define BLUETOOTH_AWAITING_CONNECTION_ANIMATION_DELAY 200
