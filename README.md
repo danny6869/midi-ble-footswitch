@@ -16,10 +16,10 @@ controllerObj.addExpressionPedal(3, MIDI_CHANNEL_2, 0);
 
 |          | Input Pin | LED Pin | Midi Channel | Midi Note | Midi Note # | Type     |
 |----------|:---------:|:-------:|:------------:|:---------:|:-----------:|:--------:|
-| Button 1 | xx        |         | 1            | C3        | 48          | Latching |
-| Button 2 | xx        |         | 1            | C#3       | 49          | Latching |
-| Button 3 | xx        |         | 1            | D3        | 50          | Latching |
-| Button 4 | xx        |         | 1            | D#3       | 51          | Latching |
+| Button 1 | xx        |         | 1            | E3        | 52          | Latching |
+| Button 2 | xx        |         | 1            | F3        | 53          | Latching |
+| Button 3 | xx        |         | 1            | F#3       | 54          | Latching |
+| Button 4 | xx        |         | 1            | G3        | 55          | Latching |
 | Expr. 1  | xx        | -       | 1            | -         | -           | Linear   |
 | Expr. 2  | xx        | -       | 2            | -         | -           | Linear   |
 
