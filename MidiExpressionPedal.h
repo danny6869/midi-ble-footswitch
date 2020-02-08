@@ -25,6 +25,7 @@ class MidiExpressionPedal {
     MidiBLEDevice *midiBleDevice;
 
     MidiExpressionPedal( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cmidi_channel, int cpedal_direction, int ccurve_type );
+    void init_gpio_pins();
     void handleState();
   private:
     // To track our CC pedal value so we know when it changes...

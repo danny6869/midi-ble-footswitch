@@ -10,7 +10,7 @@ MidiButton::MidiButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin,
   midi_note         = cmidi_note;
   button_type       = cbutton_type;
   is_on             = false;
-  last_button_state = HIGH;
+  last_button_state = BUTTON_NOT_PRESSED;
 }
 
 void MidiButton::handleState() {
@@ -23,14 +23,14 @@ void MidiButton::handleState() {
 
   switch (button_type) {
     case BUTTON_PRESS_TYPE_MOMENTARY:
-      if ( temp_button_state == LOW ) {
+      if ( temp_button_state == BUTTON_PRESSED ) {
         new_is_on = true;
       } else {
         new_is_on = false;
       }
       break;
     case BUTTON_PRESS_TYPE_LATCHING:
-      if ( ( temp_button_state == LOW ) and ( temp_button_state != last_button_state ) ) {
+      if ( ( temp_button_state == BUTTON_PRESSED ) and ( temp_button_state != last_button_state ) ) {
         // Button has been pressed, when it previously was not on the last pass...so we need to toggle...
         if ( is_on ) {
           // Currently on...toggle off...
@@ -67,4 +67,23 @@ void MidiButton::handleState() {
   // (separate from whether the button is currently on or off)...
   last_button_state = temp_button_state;
 
+}
+
+void MidiButton::reset_button_state() {
+  /*
+    This is called whenever a button needs to be reset back to its initial state.  It is called when a new BLE subscriber connects (or re-connects).
+  */
+  is_on = false;
+  last_button_state = BUTTON_NOT_PRESSED;
+  digitalWrite(led_pin, LED_OFF);
+}
+
+void MidiButton::init_gpio_pins() {
+  /*
+    Setup our button, and LED pins
+  */
+  pinMode(button_pin, INPUT_PULLUP);
+  pinMode(led_pin, OUTPUT);
+  // Turn off the LED immediately
+  digitalWrite(led_pin, LED_OFF);
 }

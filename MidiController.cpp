@@ -8,6 +8,7 @@
 MidiController::MidiController( const char *cDeviceName )
 {
   deviceName = cDeviceName;
+  last_pass_had_subscriber_connected = false;
 
   // Setup our MIDI BLE device...
   midiBleDevice = new MidiBLEDevice( (char *) deviceName );
@@ -61,11 +62,31 @@ void MidiController::loop()
   // Call the MIDI-BLE device's loop() so it can detect, and track the bluetooth related stuff...
   midiBleDevice->loop();
 
-  if ( !midiBleDevice->hasSubscriberConnected() ) {
-    // No bluetooth midi subscriber yet...
-    Serial.println("Waiting for MIDI BLE subscriber via BLE");
-    // Do connection animation while we wait...
-    show_current_bluetooth_animation_frame(buttonList, buttonCount);
+  bool has_subscriber_connected = midiBleDevice->hasSubscriberConnected();
+
+  if ( !has_subscriber_connected ) {
+    // No bluetooth midi subscriber...
+
+    if ( last_pass_had_subscriber_connected ) {
+      // We just lost our subscriber...
+      Serial.println("Lost MIDI BLE subscriber");
+      // Restart the connection animation...
+      restart_bluetooth_animation_sequence(buttonList, buttonCount);
+    } else {
+      // Waiting for a subscriber...
+      Serial.println("Waiting for MIDI BLE subscriber");
+      // Do connection animation while we wait...
+      show_current_bluetooth_animation_frame(buttonList, buttonCount);
+    }
+
+  } else if ( !last_pass_had_subscriber_connected ) {
+    // A MIDI BLE subscriber has just connected...
+    Serial.println("New MIDI BLE subscriber");
+    // Reset our button states (incase this was from a previous BLE disconnect)...
+    Serial.println("Initializing button states");
+    for ( int i = 0; i < buttonCount; i++) {
+      buttonList[i]->reset_button_state();
+    }
   } else {
     // We have a MIDI BLE subscriber...
 
@@ -82,10 +103,12 @@ void MidiController::loop()
     delay(DELAY_TIME_BETWEEN_INPUT_SCANS);
   }
 
+  // Keep track of the connection state so we know WHEN it changes for proper resetting...
+  last_pass_had_subscriber_connected = has_subscriber_connected;
+
 }
 
-void MidiController::start()
-{
+void MidiController::start() {
 
   // Initialize our microcontroller pins...
   _init_input_pins();
@@ -95,18 +118,18 @@ void MidiController::start()
 
 }
 
-void MidiController::_init_input_pins()
-{
+void MidiController::_init_input_pins() {
 
-  // Setup our button unit pins...
+  // Setup all of the I/O pins for each component
+
+  // Buttons...
   for ( int i = 0; i < buttonCount; i++) {
-    pinMode(buttonList[i]->button_pin, INPUT_PULLUP);
-    pinMode(buttonList[i]->led_pin, OUTPUT);
+    buttonList[i]->init_gpio_pins();
   }
 
-  // Setup our button unit pins...
+  // Expression pedals...
   for ( int i = 0; i < expressionPedalCount; i++) {
-    pinMode(expressionPedalList[i]->button_pin, INPUT);
+    buttonList[i]->init_gpio_pins();
   }
 
 }

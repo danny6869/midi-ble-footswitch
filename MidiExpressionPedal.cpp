@@ -33,10 +33,10 @@ int convertToMidiPositionAccelerated(int analog_input_value) {
   // Returns a midi position value (0-127) based on our analog input value (0-1023)...
   // Parabolic curve on a graph
   // |     .
-  // |    
-  // |    
+  // |
+  // |
   // |    .
-  // |    
+  // |
   // |   .
   // |  .
   // |.______
@@ -101,4 +101,12 @@ void MidiExpressionPedal::handleState() {
 
   // Update our last known status so we can detect when it changes...
   last_midi_value = new_midi_value;
+}
+
+void MidiExpressionPedal::init_gpio_pins() {
+  /*
+    Setup our button pin
+  */
+  pinMode(button_pin, INPUT);
+
 }

@@ -17,8 +17,13 @@
 
 // Some micro-controllers have these reversed (much to my surprise), so the
 // code will honour this for LED on/off commands...
-#define LED_ON LOW
-#define LED_OFF HIGH
+#define LED_ON  HIGH
+#define LED_OFF LOW
+
+// For much the same reason, button press states are defined here...
+#define BUTTON_PRESSED     LOW
+#define BUTTON_NOT_PRESSED HIGH
+
 
 // Delay time between input scans/reads (in ms)...
 #define DELAY_TIME_BETWEEN_INPUT_SCANS	50

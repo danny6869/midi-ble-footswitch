@@ -18,11 +18,13 @@ class MidiButton {
     int midi_channel;
     int midi_note;
     int button_type;
+    // For our current midi button press state
+    bool is_on;
     MidiBLEDevice *midiBleDevice;
 
     MidiButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_note, int cbutton_type );
-    // For our current midi button press state
-    bool is_on;
+    void init_gpio_pins();
+    void reset_button_state();
     void handleState();
   private:
     // To track momentary button press HIGH/LOW
