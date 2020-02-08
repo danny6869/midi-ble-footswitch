@@ -23,7 +23,7 @@ void setup() {
   controllerObj->addExpressionPedal(3, MIDI_CHANNEL_2, EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH, EXPRESSION_PEDAL_CURVE_LINEAR);
 
   // ...and while we are testing, setup the onboard button/led as a note button...
-  controllerObj->addButton(6, 7, MIDI_CHANNEL_1, MIDI_NOTE_C3, BUTTON_PRESS_TYPE_LATCHING);
+  //controllerObj->addButton(6, 7, MIDI_CHANNEL_1, MIDI_NOTE_C3, BUTTON_PRESS_TYPE_LATCHING);
 
   controllerObj->start();
 
