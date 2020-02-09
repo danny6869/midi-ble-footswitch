@@ -2,6 +2,9 @@
 
 This software will allow you (with the proper hardware) to easily create a fully wireless Midi BLE pedal/footswitch system.  Out of the box, this software is configured for four footswitches, and two expression pedals.
 
+Have a look at the demonstration video found here...
+[![Demonstration Video](http://img.youtube.com/vi/HWy88jRTAKY/0.jpg)](http://www.youtube.com/watch?v=HWy88jRTAKY)
+
 The lines that do that magic for you are found in [midi-ble-footwitch/midi-ble-footswitch.ino]
 
 ```
