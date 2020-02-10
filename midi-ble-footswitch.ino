@@ -13,9 +13,9 @@ void setup() {
   controllerObj = new MidiController(BLE_DEVICE_NAME);
 
   // Add all of our controls for this pedal...
-  // 4 midi note buttons (input pins: 12, 14, 17, 19, led pins: 11, 13, 16, 18)
-  controllerObj->addButton(12, 11, MIDI_CHANNEL_1, MIDI_NOTE_E3, BUTTON_PRESS_TYPE_MOMENTARY);
-  controllerObj->addButton(14, 13, MIDI_CHANNEL_1, MIDI_NOTE_F3, BUTTON_PRESS_TYPE_MOMENTARY);
+  // 4 midi note buttons (input pins: 13, 15, 17, 19, led pins: 12, 14, 16, 18)
+  controllerObj->addButton(13, 12, MIDI_CHANNEL_1, MIDI_NOTE_E3, BUTTON_PRESS_TYPE_MOMENTARY);
+  controllerObj->addButton(15, 14, MIDI_CHANNEL_1, MIDI_NOTE_F3, BUTTON_PRESS_TYPE_MOMENTARY);
   controllerObj->addButton(17, 16, MIDI_CHANNEL_1, MIDI_NOTE_Gb3, BUTTON_PRESS_TYPE_MOMENTARY);
   controllerObj->addButton(19, 18, MIDI_CHANNEL_1, MIDI_NOTE_G3, BUTTON_PRESS_TYPE_MOMENTARY);
   // ...and 2 midi expression pedals (input pins: 2, and 3)
