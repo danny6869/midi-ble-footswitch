@@ -27,7 +27,7 @@ class MidiBLEDevice {
 
     void sendMIDINoteOff( int midi_channel, int midi_note );
     void sendMIDINoteOn( int midi_channel, int midi_note );
-    void sendMIDIControlChange( int midi_channel, int new_midi_value );
+    void sendMIDIControlChange( int midi_channel, int midi_control_number, int midi_control_position );
 
 };
 
