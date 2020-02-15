@@ -2,7 +2,8 @@
 #include "config.h"
 #include "LEDAnimation.h"
 #include "MidiController.h"
-#include "MidiButton.h"
+#include "MidiCCButton.h"
+#include "MidiNoteButton.h"
 #include "MidiExpressionPedal.h"
 
 MidiController::MidiController( const char *cDeviceName )
@@ -15,7 +16,7 @@ MidiController::MidiController( const char *cDeviceName )
 
 }
 
-void MidiController::addButton( int buttonPinNumber, int ledPinNumber, int midiChannelNumber, int midiNoteNumber, int buttonType )
+void MidiController::addCCButton( int buttonPinNumber, int ledPinNumber, int midiChannelNumber, int midiControlNumber )
 {
   // Double-check to make sure we're not exceeding our bounds...
   if ( buttonCount >= _MAX_MIDI_CONTROLLER_BUTTONS ) {
@@ -25,14 +26,31 @@ void MidiController::addButton( int buttonPinNumber, int ledPinNumber, int midiC
 
   // Create the new button...
   int buttonId = _get_next_id();
-  MidiButton *buttonObj = new MidiButton( midiBleDevice, buttonId, buttonPinNumber, ledPinNumber, midiChannelNumber, midiNoteNumber, buttonType );
+  MidiCCButton *buttonObj = new MidiCCButton( midiBleDevice, buttonId, buttonPinNumber, ledPinNumber, midiChannelNumber, midiControlNumber );
 
   // Add it to our list (incrementing our counter too)...
   buttonList[buttonCount] = buttonObj;
   buttonCount++;
 }
 
-void MidiController::addExpressionPedal( int expressionPedalPinNumber, int midiChannelNumber, int pedalDirection, int curveType )
+void MidiController::addNoteButton( int buttonPinNumber, int ledPinNumber, int midiChannelNumber, int midiNoteNumber, int buttonType )
+{
+  // Double-check to make sure we're not exceeding our bounds...
+  if ( buttonCount >= _MAX_MIDI_CONTROLLER_BUTTONS ) {
+    Serial.println("ERROR: MAXIMUM NUMBER OF BUTTONS REACHED!!!");
+    return;
+  }
+
+  // Create the new button...
+  int buttonId = _get_next_id();
+  MidiNoteButton *buttonObj = new MidiNoteButton( midiBleDevice, buttonId, buttonPinNumber, ledPinNumber, midiChannelNumber, midiNoteNumber, buttonType );
+
+  // Add it to our list (incrementing our counter too)...
+  buttonList[buttonCount] = buttonObj;
+  buttonCount++;
+}
+
+void MidiController::addExpressionPedal( int expressionPedalPinNumber, int midiChannelNumber, int midiControlNumber, int pedalDirection, int curveType )
 {
   // Double-check to make sure we're not exceeding our bounds...
   if ( expressionPedalCount >= _MAX_MIDI_CONTROLLER_EXPRESSION_PEDALS ) {
@@ -42,7 +60,7 @@ void MidiController::addExpressionPedal( int expressionPedalPinNumber, int midiC
 
   // Create the new expressionPedal...
   int expressionPedalId = _get_next_id();
-  MidiExpressionPedal *expressionPedalObj = new MidiExpressionPedal( midiBleDevice, expressionPedalId, expressionPedalPinNumber, midiChannelNumber, pedalDirection, curveType);
+  MidiExpressionPedal *expressionPedalObj = new MidiExpressionPedal( midiBleDevice, expressionPedalId, expressionPedalPinNumber, midiChannelNumber, midiControlNumber, pedalDirection, curveType);
 
   // Add it to our list (incrementing our counter too)...
   expressionPedalList[expressionPedalCount] = expressionPedalObj;
@@ -85,7 +103,10 @@ void MidiController::loop()
     // Reset our button states (incase this was from a previous BLE disconnect)...
     Serial.println("Initializing button states");
     for ( int i = 0; i < buttonCount; i++) {
-      buttonList[i]->reset_button_state();
+      buttonList[i]->resetState();
+    }
+    for ( int i = 0; i < expressionPedalCount; i++) {
+      expressionPedalList[i]->resetState();
     }
   } else {
     // We have a MIDI BLE subscriber...
@@ -124,12 +145,12 @@ void MidiController::_init_input_pins() {
 
   // Buttons...
   for ( int i = 0; i < buttonCount; i++) {
-    buttonList[i]->init_gpio_pins();
+    buttonList[i]->initGPIOPins();
   }
 
   // Expression pedals...
   for ( int i = 0; i < expressionPedalCount; i++) {
-    buttonList[i]->init_gpio_pins();
+    buttonList[i]->initGPIOPins();
   }
 
 }

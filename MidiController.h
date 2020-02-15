@@ -1,7 +1,9 @@
 #pragma once
 #include "MidiBLEProtocol.h"
 #include "MidiBLEDevice.h"
-#include "MidiButton.h"
+#include "IMidiLightedButton.h"
+#include "MidiCCButton.h"
+#include "MidiNoteButton.h"
 #include "MidiExpressionPedal.h"
 
 #ifndef DMIDICONTROLLER_H
@@ -17,7 +19,7 @@ class MidiController {
     bool last_pass_had_subscriber_connected;
 
     // Non-dynamic list(s) to prevent allocation fragmentation
-    MidiButton *buttonList[_MAX_MIDI_CONTROLLER_BUTTONS] = {};
+    IMidiLightedButton *buttonList[_MAX_MIDI_CONTROLLER_BUTTONS] = {};
     int buttonCount = 0;
     MidiExpressionPedal *expressionPedalList[_MAX_MIDI_CONTROLLER_EXPRESSION_PEDALS] = {};
     int expressionPedalCount = 0;
@@ -27,8 +29,9 @@ class MidiController {
   public:
 
     MidiController( const char *deviceName );
-    void addButton( int buttonPinNumber, int ledPinNumber, int midiChannelNumber, int midiNoteNumber, int buttonType );
-    void addExpressionPedal( int expressionPedalPinNumber, int midiChannelNumber, int pedalDirection, int curveType );
+    void addNoteButton( int buttonPinNumber, int ledPinNumber, int midiChannelNumber, int midiNoteNumber, int buttonType );
+    void addCCButton( int buttonPinNumber, int ledPinNumber, int midiChannelNumber, int midiControlNumber );
+    void addExpressionPedal( int expressionPedalPinNumber, int midiChannelNumber, int midiCOntrolNumber, int pedalDirection, int curveType );
     void start();
     void loop();
 };
