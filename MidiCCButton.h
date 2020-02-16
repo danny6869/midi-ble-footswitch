@@ -5,10 +5,6 @@
 #ifndef DMIDICCBUTTON_H
 #define DMIDICCBUTTON_H
 
-// If you want note on/off buttons to latch or not...
-#define BUTTON_PRESS_TYPE_MOMENTARY   1
-#define BUTTON_PRESS_TYPE_LATCHING    2
-
 // Defines what is needed to make each button unit work...
 class MidiCCButton : public IMidiLightedButton {
 
@@ -17,12 +13,12 @@ class MidiCCButton : public IMidiLightedButton {
     int button_pin;
     int led_pin;
     int midi_channel;
-    int midi_note;
+    int midi_control_number;
     // For our current midi button press state
     bool is_on;
     MidiBLEDevice *midiBleDevice;
 
-    MidiCCButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_note );
+    MidiCCButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_control_number );
     void initGPIOPins();
     void resetState();
     void handleState();

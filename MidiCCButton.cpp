@@ -1,15 +1,15 @@
 #include "MidiCCButton.h"
 #include "config.h"
 
-MidiCCButton::MidiCCButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_note ) {
-  id                = cid;
-  midiBleDevice     = cMidiBleDevice;
-  button_pin        = cbutton_pin;
-  led_pin           = cled_pin;
-  midi_channel      = cmidi_channel;
-  midi_note         = cmidi_note;
-  is_on             = false;
-  last_button_state = BUTTON_NOT_PRESSED;
+MidiCCButton::MidiCCButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_control_number ) {
+  id                  = cid;
+  midiBleDevice       = cMidiBleDevice;
+  button_pin          = cbutton_pin;
+  led_pin             = cled_pin;
+  midi_channel        = cmidi_channel;
+  midi_control_number = cmidi_control_number;
+  is_on               = false;
+  last_button_state   = BUTTON_NOT_PRESSED;
 }
 
 void MidiCCButton::handleState() {
@@ -20,21 +20,21 @@ void MidiCCButton::handleState() {
   // Read in the current button state...
   int temp_button_state = digitalRead(button_pin);
 
-      if ( temp_button_state == BUTTON_PRESSED ) {
-        new_is_on = true;
-      } else {
-        new_is_on = false;
-      }
+  if ( temp_button_state == BUTTON_PRESSED ) {
+    new_is_on = true;
+  } else {
+    new_is_on = false;
+  }
 
   if ( new_is_on != is_on ) {
     // New button press state...handle it...
 
     if ( new_is_on == true ) {
       turnLEDOn();
-      midiBleDevice->sendMIDINoteOn( midi_channel, midi_note );
+      midiBleDevice->sendMIDIControlChange( midi_channel, midi_control_number, 127 );
     } else {
       turnLEDOff();
-      midiBleDevice->sendMIDINoteOff( midi_channel, midi_note );
+      midiBleDevice->sendMIDIControlChange( midi_channel, midi_control_number, 0 );
     }
 
     // Store the new on/off state to match what we just did...
