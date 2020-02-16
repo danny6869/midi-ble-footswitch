@@ -78,7 +78,7 @@ depending on the position of the pedal.
 | EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-decelerated-normal.png)  |
 | EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-linear-reverse.png)      |
 | EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-accelerated-reverse.png) |
-| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-decelerated-revese.png)  |
+| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-decelerated-reverse.png) |
 
 #### Midi Note Buttons (non-default/optional)
 
