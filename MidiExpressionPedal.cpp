@@ -33,13 +33,11 @@ int convertToMidiPositionLinear(int analog_input_value) {
 int convertToMidiPositionAccelerated(int analog_input_value) {
   // Returns a midi position value (0-127) based on our analog input value (0-1023)...
   // Parabolic curve on a graph
-  // |     .
-  // |
-  // |
-  // |    .
-  // |
-  // |   .
-  // |  .
+  // |                    .
+  // |                   .
+  // |                 .
+  // |             .
+  // |       .
   // |.______
   int new_midi_value = int ( pow(analog_input_value, 2) / pow(_MAXIMUM_READ_VALUE, 2) * _MAXIMUM_MIDI_CC_VALUE );
   return new_midi_value;
@@ -61,28 +59,28 @@ void MidiExpressionPedal::handleState() {
 
   int analog_input_value = analogRead(button_pin);
 
+  // Do our calculations based on the intended direction...
+  int analog_input_value_for_calc = ( pedal_direction == EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW )
+    ? _MAXIMUM_READ_VALUE - analog_input_value
+    : analog_input_value;
+
   // Calculate what that translates to on our MIDI CC scale...
   int new_midi_value;
   switch (curve_type) {
     case EXPRESSION_PEDAL_CURVE_LINEAR:
-      new_midi_value = convertToMidiPositionLinear(analog_input_value);
+      new_midi_value = convertToMidiPositionLinear(analog_input_value_for_calc);
       break;
     case EXPRESSION_PEDAL_CURVE_ACCELERATED:
-      new_midi_value = convertToMidiPositionAccelerated(analog_input_value);
+      new_midi_value = convertToMidiPositionAccelerated(analog_input_value_for_calc);
       break;
     case EXPRESSION_PEDAL_CURVE_DECELERATED:
-      new_midi_value = convertToMidiPositionDecelerated(analog_input_value);
+      new_midi_value = convertToMidiPositionDecelerated(analog_input_value_for_calc);
       break;
     default:
       Serial.print("ERROR: Unknown value for expression pedal curve type: ");
       Serial.print(curve_type);
       Serial.println();
       break;
-  }
-
-  // Invert the direction if needed...
-  if ( pedal_direction == EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW ) {
-    new_midi_value = _MAXIMUM_MIDI_CC_VALUE - new_midi_value;
   }
 
   if ( new_midi_value != last_midi_value ) {
