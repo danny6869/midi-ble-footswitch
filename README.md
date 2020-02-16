@@ -73,12 +73,12 @@ depending on the position of the pedal.
 
 | Curve Type                         | Direction                              | Curve Shape                                    |
 |:-----------------------------------|:--------------------------------------|:------------------------------------------------|
-| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-linear-normal.jpg)       |
-| EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-accelerated-normal.jpg)  |
-| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-decelerated-normal.jpg)  |
-| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-linear-reverse.jpg)      |
-| EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-accelerated-reverse.jpg) |
-| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-decelerated-revese.jpg)  |
+| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-linear-normal.png)       |
+| EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-accelerated-normal.png)  |
+| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-decelerated-normal.png)  |
+| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-linear-reverse.png)      |
+| EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-accelerated-reverse.png) |
+| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-decelerated-revese.png)  |
 
 #### Midi Note Buttons (non-default/optional)
 
@@ -134,7 +134,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - Make sure it can support supplying 3.3v for programming the sparkfun microcontroller board
   - [Available on Amazon - FT232RL](https://www.amazon.ca/gp/product/B01JG8H5U4)
 - LiPo Battery
-  - 800maH
+  - 800maH (at maximum draw, about 8h, in reality at least double that)
   - 44mm x 24mm x 9mm
   - [Available on Amazon - B01N74TTW6](https://www.amazon.ca/gp/product/B01N74TTW6)
 - LiPo Charging Circuit
