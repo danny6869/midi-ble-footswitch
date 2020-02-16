@@ -63,7 +63,7 @@ depending on the position of the pedal.
 ```
 
 | Pedal # | Input Pin | Midi Channel | Midi Control # | Direction   | Curve Type |
-|:-------:|:---------:|:------------:|:--------------:|:-----------:|:---------:|:----------:|
+|:-------:|:---------:|:------------:|:--------------:|:-----------:|:----------:|
 | 1       | 2         | 1            | 12             | Low to High | Linear     |
 | 2       | 3         | 2            | 13             | Low to High | Linear     |
 
@@ -71,14 +71,14 @@ depending on the position of the pedal.
 
 ##### Direction & Curve Types Constants
 
-| Curve Type                         | Direction                              | Curve Shape |
-|:-----------------------------------|:--------------------------------------|:----------|
-| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-linear-normal.jpg) |
-| EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-accelerated-normal.jpg) |
-| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-decelerated-normal.jpg) |
-| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-linear-reverse.jpg) |
+| Curve Type                         | Direction                              | Curve Shape                                    |
+|:-----------------------------------|:--------------------------------------|:------------------------------------------------|
+| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-linear-normal.jpg)       |
+| EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-accelerated-normal.jpg)  |
+| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_LOW_TO_HIGH | ![shape](README/curve-decelerated-normal.jpg)  |
+| EXPRESSION_PEDAL_CURVE_LINEAR      | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-linear-reverse.jpg)      |
 | EXPRESSION_PEDAL_CURVE_ACCELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-accelerated-reverse.jpg) |
-| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-decelerated-revese.jpg) |
+| EXPRESSION_PEDAL_CURVE_DECELERATED | EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW | ![shape](README/curve-decelerated-revese.jpg)  |
 
 #### Midi Note Buttons (non-default/optional)
 
