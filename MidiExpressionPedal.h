@@ -1,4 +1,5 @@
 #include "MidiBLEDevice.h"
+#include "IMidiControllerComponent.h"
 
 #pragma once
 
@@ -15,18 +16,20 @@
 #define EXPRESSION_PEDAL_DIRECTION_HIGH_TO_LOW      2
 
 // Defines what is needed to make each button unit work...
-class MidiExpressionPedal {
+class MidiExpressionPedal : public IMidiControllerComponent {
   public:
     int id;
     int button_pin;
     int midi_channel;
+    int midi_control_number;
     int curve_type;
     int pedal_direction;
     MidiBLEDevice *midiBleDevice;
 
-    MidiExpressionPedal( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cmidi_channel, int cpedal_direction, int ccurve_type );
-    void init_gpio_pins();
+    MidiExpressionPedal( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cmidi_channel, int cmidi_control_number, int cpedal_direction, int ccurve_type );
+    void initGPIOPins();
     void handleState();
+    void resetState();
   private:
     // To track our CC pedal value so we know when it changes...
     int last_midi_value;

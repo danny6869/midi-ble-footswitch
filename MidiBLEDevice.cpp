@@ -96,8 +96,7 @@ void MidiBLEDevice::sendMIDINoteOn( int midi_channel, int midi_note ) {
   Serial.print(midi_channel);
   Serial.print(";  Note: ");
   Serial.print(midi_note);
-  Serial.print(";  ");
-  Serial.print("Note ON");
+  Serial.print(";  Position: ON");
   Serial.println();
   
   MidiBlePacket *packet = MidiBLEProtocol::generateNoteOnOffPacket( midi_channel, midi_note, true );
@@ -111,8 +110,7 @@ void MidiBLEDevice::sendMIDINoteOff( int midi_channel, int midi_note ) {
   Serial.print(midi_channel);
   Serial.print(";  Note: ");
   Serial.print(midi_note);
-  Serial.print(";  ");
-  Serial.print("Note OFF");
+  Serial.print(";  Position: OFF");
   Serial.println();
 
   MidiBlePacket *packet = MidiBLEProtocol::generateNoteOnOffPacket( midi_channel, midi_note, false );
@@ -120,15 +118,17 @@ void MidiBLEDevice::sendMIDINoteOff( int midi_channel, int midi_note ) {
   sendMidiBlePacket( packet );
 }
 
-void MidiBLEDevice::sendMIDIControlChange( int midi_channel, int new_midi_value ) {
+void MidiBLEDevice::sendMIDIControlChange( int midi_channel, int midi_control_number, int midi_control_position ) {
 
   Serial.print("Channel: ");
   Serial.print(midi_channel);
-  Serial.print(";  Control Change Position: ");
-  Serial.print(new_midi_value);
+  Serial.print(";  Control #: ");
+  Serial.print(midi_control_number);
+  Serial.print(";  Position: ");
+  Serial.print(midi_control_position);
   Serial.println();
 
-  MidiBlePacket *packet = MidiBLEProtocol::generateControlChangePacket( midi_channel, new_midi_value );
+  MidiBlePacket *packet = MidiBLEProtocol::generateControlChangePacket( midi_channel, midi_control_number, midi_control_position );
   MidiBLEProtocol::logMidiPacket( packet );
   sendMidiBlePacket( packet );
 }

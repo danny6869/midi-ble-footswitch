@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "config.h"
 #include "LEDAnimation.h"
-#include "MidiButton.h"
+#include "IMidiLightedButton.h"
 
 // Somewhere to keep what frame we are currently displaying...
 int _bluetooth_connection_animation_frame = 1;
 
-void _light_buttons_on_off(MidiButton **buttonList, int buttonCount, int numTimes) {
+void _light_buttons_on_off(IMidiLightedButton **buttonList, int buttonCount, int numTimes) {
 
   /*
      Lights all buttons ON, then then OFF.
@@ -16,14 +16,14 @@ void _light_buttons_on_off(MidiButton **buttonList, int buttonCount, int numTime
 
     // All on...
     for (int i = 0; i < buttonCount; i++) {
-      digitalWrite(buttonList[i]->led_pin, LED_ON);
+      buttonList[i]->turnLEDOn();
     }
 
     delay(BOOTUP_ANIMATION_DELAY);
 
     // All off...
     for (int i = 0; i < buttonCount; i++) {
-      digitalWrite(buttonList[i]->led_pin, LED_OFF);
+      buttonList[i]->turnLEDOff();
     }
 
     delay(BOOTUP_ANIMATION_DELAY);
@@ -31,46 +31,46 @@ void _light_buttons_on_off(MidiButton **buttonList, int buttonCount, int numTime
 
 }
 
-void _light_buttons_left_to_right(MidiButton **buttonList, int buttonCount) {
+void _light_buttons_left_to_right(IMidiLightedButton **buttonList, int buttonCount) {
   /*
      Lights buttons from left to right one by one.
   */
 
   for ( int i = 0; i < buttonCount; i++ ) {
-    digitalWrite(buttonList[i]->led_pin, LED_ON);
+      buttonList[i]->turnLEDOn();
     delay(BOOTUP_ANIMATION_DELAY);
-    digitalWrite(buttonList[i]->led_pin, LED_OFF);
+      buttonList[i]->turnLEDOff();
   }
 
   delay(BOOTUP_ANIMATION_DELAY);
 
 }
 
-void _light_buttons_left_to_right_to_left(MidiButton **buttonList, int buttonCount) {
+void _light_buttons_left_to_right_to_left(IMidiLightedButton **buttonList, int buttonCount) {
 
   /*
      Lights buttons from left to right, and then right to left one by one.
   */
 
   for ( int i = 0; i < buttonCount; i++ ) {
-    digitalWrite(buttonList[i]->led_pin, LED_ON);
+      buttonList[i]->turnLEDOn();
     delay(BOOTUP_ANIMATION_DELAY);
-    digitalWrite(buttonList[i]->led_pin, LED_OFF);
+      buttonList[i]->turnLEDOff();
   }
 
   // Skip the extra one on the end, as we don't
   // want it to light up twice from the loop above...
   for ( int i = buttonCount - 2; i >= 0; i-- ) {
-    digitalWrite(buttonList[i]->led_pin, LED_ON);
+      buttonList[i]->turnLEDOn();
     delay(BOOTUP_ANIMATION_DELAY);
-    digitalWrite(buttonList[i]->led_pin, LED_OFF);
+      buttonList[i]->turnLEDOff();
   }
 
   delay(BOOTUP_ANIMATION_DELAY);
 
 }
 
-void show_bootup_animation_complete(MidiButton **buttonList, int buttonCount) {
+void show_bootup_animation_complete(IMidiLightedButton **buttonList, int buttonCount) {
   /*
      This is called after the initial boot sequence/animation.
   */
@@ -78,7 +78,7 @@ void show_bootup_animation_complete(MidiButton **buttonList, int buttonCount) {
 }
 
 
-void show_bootup_animation_sequence(MidiButton **buttonList, int buttonCount) {
+void show_bootup_animation_sequence(IMidiLightedButton **buttonList, int buttonCount) {
   /*
      This is called when the unit is first powered on.  It's job is to light all button LEDs
      to allow for a visual check that they are all working.
@@ -88,7 +88,7 @@ void show_bootup_animation_sequence(MidiButton **buttonList, int buttonCount) {
   show_bootup_animation_complete(buttonList, buttonCount);
 }
 
-void show_current_bluetooth_animation_frame(MidiButton **buttonList, int buttonCount) {
+void show_current_bluetooth_animation_frame(IMidiLightedButton **buttonList, int buttonCount) {
   /*
      This is called within the main program loop() whenever we area awaiting a
      bluetooth connection, with a MIDI BLE characteristic subscriber.
@@ -108,9 +108,9 @@ void show_current_bluetooth_animation_frame(MidiButton **buttonList, int buttonC
 
   for ( int i = 0; i < buttonCount; i++ ) {
     if ( ( i % _NUM_FRAMES ) + 1 == _bluetooth_connection_animation_frame ) {
-      digitalWrite(buttonList[i]->led_pin, LED_ON);
+      buttonList[i]->turnLEDOn();
     } else {
-      digitalWrite(buttonList[i]->led_pin, LED_OFF);
+      buttonList[i]->turnLEDOff();
     }
   }
 
@@ -125,7 +125,7 @@ void show_current_bluetooth_animation_frame(MidiButton **buttonList, int buttonC
   delay(BLUETOOTH_AWAITING_CONNECTION_ANIMATION_DELAY);
 }
 
-void restart_bluetooth_animation_sequence(MidiButton **buttonList, int buttonCount) {
+void restart_bluetooth_animation_sequence(IMidiLightedButton **buttonList, int buttonCount) {
   /* This is called within the main program loop() whenever we have dropped an active
      bluetooth connection, with a MIDI BLE characteristic subscriber...so we can
      re-start our bluetooth connection animation.  Also draws the first frame.

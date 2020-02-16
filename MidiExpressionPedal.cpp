@@ -6,15 +6,16 @@
 static int _MAXIMUM_READ_VALUE    = pow (2, 10) - 1;
 static int _MAXIMUM_MIDI_CC_VALUE = 127;
 
-MidiExpressionPedal::MidiExpressionPedal( MidiBLEDevice * cMidiBleDevice, int cid, int cbutton_pin, int cmidi_channel, int cpedal_direction, int ccurve_type )
+MidiExpressionPedal::MidiExpressionPedal( MidiBLEDevice * cMidiBleDevice, int cid, int cbutton_pin, int cmidi_channel, int cmidi_control_number, int cpedal_direction, int ccurve_type )
 {
-  id                = cid;
-  midiBleDevice     = cMidiBleDevice;
-  button_pin        = cbutton_pin;
-  midi_channel      = cmidi_channel;
-  pedal_direction   = cpedal_direction;
-  curve_type        = ccurve_type;
-  last_midi_value   = 0;
+  id                  = cid;
+  midiBleDevice       = cMidiBleDevice;
+  button_pin          = cbutton_pin;
+  midi_channel        = cmidi_channel;
+  midi_control_number = cmidi_control_number;
+  pedal_direction     = cpedal_direction;
+  curve_type          = ccurve_type;
+  last_midi_value     = 0;
 }
 
 int convertToMidiPositionLinear(int analog_input_value) {
@@ -95,7 +96,7 @@ void MidiExpressionPedal::handleState() {
     Serial.print("; " + pedal_direction ? "(normal)" : "(reversed)");
     Serial.println();
 
-    midiBleDevice->sendMIDIControlChange( midi_channel, new_midi_value );
+    midiBleDevice->sendMIDIControlChange( midi_channel, midi_control_number, new_midi_value );
 
   } // else no change in state, nothing to update
 
@@ -103,10 +104,13 @@ void MidiExpressionPedal::handleState() {
   last_midi_value = new_midi_value;
 }
 
-void MidiExpressionPedal::init_gpio_pins() {
+void MidiExpressionPedal::initGPIOPins() {
   /*
     Setup our button pin
   */
   pinMode(button_pin, INPUT);
 
+}
+void MidiExpressionPedal::resetState() {
+  /* No-op for expression pedals */
 }

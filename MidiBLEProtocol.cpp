@@ -52,8 +52,8 @@ MidiBlePacket *MidiBLEProtocol::generateNoteOnOffPacket(int channelNumber, int n
   /*
      Generates and returns a NOTE ON/OFF packet in full, ready for transmission.
 
-          channelNumber: 1-16
-          noteNUmber: 0-127
+          channelNumber: 1-16 (MIDI_CHANNEL_*)
+          noteNUmber: 0-127 (MIDI_NOTE_*)
           onOff: 0-127
   */
 
@@ -79,12 +79,13 @@ MidiBlePacket *MidiBLEProtocol::generateNoteOnOffPacket(int channelNumber, int n
   return midiPacket;
 }
 
-MidiBlePacket *MidiBLEProtocol::generateControlChangePacket(int channelNumber, int pedalPosition) {
+MidiBlePacket *MidiBLEProtocol::generateControlChangePacket(int channelNumber, int controlNumber, int controlPosition) {
   /*
      Generates and returns a CONTROL CHANGE packet in full, ready for transmission.
 
-          channelNumber: 1-16
-          pedalPosition: 0-127
+          channelNumber: 1-16 (MIDI_CHANNEL_*)
+          controlNumber: 0-127 (MIDI_CC_CONTROL_*)
+          controlPosition: 0-127
   */
 
   // Generate our header/timestamp bytes for this MIDI BLE packet...
@@ -96,11 +97,8 @@ MidiBlePacket *MidiBLEProtocol::generateControlChangePacket(int channelNumber, i
   // Binary: 1011xxxx signifies control change...
   byte statusByte = ( 176 + (channelNumber - 1) );
 
-  // Expression pedal (according to the MIDI spec)...
-  byte controlNumber = 11;
-
   struct MidiBlePacket *midiPacket = new MidiBlePacket();
-  midiPacket->data = new byte[5] { headerByte, timestampByte, statusByte, controlNumber, pedalPosition };
+  midiPacket->data = new byte[5] { headerByte, timestampByte, statusByte, controlNumber, controlPosition };
   midiPacket->size = 5;
 
   return midiPacket;

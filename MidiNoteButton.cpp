@@ -1,7 +1,7 @@
-#include "MidiButton.h"
+#include "MidiNoteButton.h"
 #include "config.h"
 
-MidiButton::MidiButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_note, int cbutton_type ) {
+MidiNoteButton::MidiNoteButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_note, int cbutton_type ) {
   id                = cid;
   midiBleDevice     = cMidiBleDevice;
   button_pin        = cbutton_pin;
@@ -13,7 +13,7 @@ MidiButton::MidiButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin,
   last_button_state = BUTTON_NOT_PRESSED;
 }
 
-void MidiButton::handleState() {
+void MidiNoteButton::handleState() {
 
   // Default to our current value...
   int new_is_on = is_on;
@@ -52,10 +52,10 @@ void MidiButton::handleState() {
     // New button press state...handle it...
 
     if ( new_is_on == true ) {
-      digitalWrite(led_pin, LED_ON);
+      turnLEDOn();
       midiBleDevice->sendMIDINoteOn( midi_channel, midi_note );
     } else {
-      digitalWrite(led_pin, LED_OFF);
+      turnLEDOff();
       midiBleDevice->sendMIDINoteOff( midi_channel, midi_note );
     }
 
@@ -69,21 +69,29 @@ void MidiButton::handleState() {
 
 }
 
-void MidiButton::reset_button_state() {
+void MidiNoteButton::resetState() {
   /*
     This is called whenever a button needs to be reset back to its initial state.  It is called when a new BLE subscriber connects (or re-connects).
   */
   is_on = false;
   last_button_state = BUTTON_NOT_PRESSED;
-  digitalWrite(led_pin, LED_OFF);
+  turnLEDOff();
 }
 
-void MidiButton::init_gpio_pins() {
+void MidiNoteButton::initGPIOPins() {
   /*
     Setup our button, and LED pins
   */
   pinMode(button_pin, INPUT_PULLUP);
   pinMode(led_pin, OUTPUT);
   // Turn off the LED immediately
+  turnLEDOff();
+}
+
+void MidiNoteButton::turnLEDOff() {
   digitalWrite(led_pin, LED_OFF);
+}
+
+void MidiNoteButton::turnLEDOn() {
+  digitalWrite(led_pin, LED_ON);
 }

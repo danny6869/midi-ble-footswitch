@@ -1,15 +1,16 @@
 #include "MidiBLEDevice.h"
+#include "IMidiLightedButton.h"
 
 #pragma once
-#ifndef DMIDIBUTTON_H
-#define DMIDIBUTTON_H
+#ifndef DMIDINOTEBUTTON_H
+#define DMIDINOTEBUTTON_H
 
 // If you want note on/off buttons to latch or not...
 #define BUTTON_PRESS_TYPE_MOMENTARY   1
 #define BUTTON_PRESS_TYPE_LATCHING    2
 
 // Defines what is needed to make each button unit work...
-class MidiButton {
+class MidiNoteButton : public IMidiLightedButton {
 
   public:
     int id;
@@ -22,10 +23,12 @@ class MidiButton {
     bool is_on;
     MidiBLEDevice *midiBleDevice;
 
-    MidiButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_note, int cbutton_type );
-    void init_gpio_pins();
-    void reset_button_state();
+    MidiNoteButton( MidiBLEDevice *cMidiBleDevice, int cid, int cbutton_pin, int cled_pin, int cmidi_channel, int cmidi_note, int cbutton_type );
+    void initGPIOPins();
+    void resetState();
     void handleState();
+    void turnLEDOff();
+    void turnLEDOn();
   private:
     // To track momentary button press HIGH/LOW
     int last_button_state;
