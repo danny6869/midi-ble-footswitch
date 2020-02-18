@@ -123,16 +123,19 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
 
 ### Parts List
 
-(TODO/WIP)
+Listed here are all of the components and parts you will need to create a
+fully working footswitch, along with links to where you can buy the
+components.  You can probably find other substitutes, but this is just what
+I ended up working with, so I kept it the same so there would be no
+surprises for the next person.
+
+#### Footswitch Components
+
 - Microcontroller
   - Sparkfun BLE Breakout Board
     - Model: WRL-13990 (nRF52832)
     - [Avaliable at DigiKey](https://www.digikey.ca/product-detail/en/sparkfun-electronics/WRL-13990/1568-1449-ND/6562783)
   - WARNING: I tried other cheaper all-in-one boards, but they did not allow low-level access to the bluetooth chipset's features, so I opted to use this more expensive sparkfun board.  If you want to try using abother microcontroller with a NRF52832 chip built in, do so at your own risk.  (the software written SHOULD be compatible --- if you figure out how to use one of those cheaper boards, let me know so I can update the instructions here)
-- Microcontroller Programmer
-  - Any USB to TTL Serial Adapter Module will do
-  - Make sure it can support supplying 3.3v for programming the sparkfun microcontroller board
-  - [Available on Amazon - FT232RL](https://www.amazon.ca/gp/product/B01JG8H5U4)
 - LiPo Battery
   - 800maH (at maximum draw, about 8h, in reality at least double that)
   - 44mm x 24mm x 9mm
@@ -156,6 +159,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - 6mm x 6mm x 5mm
   - [Avaialble at Adafruit](https://www.adafruit.com/product/367)
   - [Available at Amazon](https://www.amazon.ca/dp/product/B078HL5CC7)
+- Optional: 4 small zip-ties for internal wire management
 - Optional: Stereo 1/4" jacks (for expression pedal ports)
 - Stranded Wire
   - 24 gauge
@@ -168,6 +172,21 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - 1 x 2 conductor connector (for LiPo)
   - 1 x 4 conductor connector (optional: for every 2 expression pedal ports)
 
+#### Programming Equipment
+
+You will need the following parts to get to the point of being able to
+program the Sparkfun BLE Breakout Board.
+
+- Microcontroller Programmer
+  - Any USB to TTL Serial Adapter Module will do
+  - Make sure it can support supplying 3.3v for programming the sparkfun microcontroller board
+  - [Available on Amazon - Gikfun FT232RL 3.3V 5.5V FTDI USB to TTL Serial Adapter](https://www.amazon.ca/gp/product/B01JG8H5U4)
+- Header Pin Strip (7 pins worth)
+- 6 jumper wires (female-female)
+
+#### Soldering Equipment
+
+
 Of course you will need the following to piece this thing together.
 
 - Soldering equipment
@@ -175,13 +194,109 @@ Of course you will need the following to piece this thing together.
   - Solder (good quality - for electronics)
   - Solder flux/paste
 - Thin (2-3mm?) heat-shrink tubing to keep things neat and tidy
-- 4 small zip-ties for internal wire management
 
 
 
 ### Instructions
 
-(TODO/WIP)
+(TODO/WIP --- re-organize this once all the bits are listed hetre)
+
+#### Setting up the Arduino IDE
+
+- Download the Arduino IDE [here](https://www.arduino.cc/en/main/software)
+- Open the Arduino IDE
+- Add the sparkfun repo
+  - CLick File -> Preferences
+  - Under "Additional Board Manager URLs", enter
+    `https://raw.githubusercontent.com/sparkfun/Arduino_Boards/nrf5/IDE_Board_Manager/package_sparkfun_index.json`
+    ![image](README/arduino-board-add.png)
+  - Click OK
+- Install the sparkfun driver
+  - Click Tools -> Board -> Boards Manager
+  - In the search box, enter `SparkFun nRF52 Boards`.
+  - Select that item, and click INSTALL
+    ![image](README/arduino-nrf52-board-install.png)
+  - BE PATIENT!  This takes a while, and will look like it's not doing
+    anything for a while.  It took several minutes for me.
+- Select the Sparkfun Board in the IDE
+  - Click Tools -> Board
+  - Select "SparkFun nRF52832 Breakout" under the "Nordic Semiconductor nRF5 Boards" section.
+    ![image](README/arduino-board-selection.png)
+- Clone the software github
+  - Drop down to a terminal or command prompt
+  - Navigate to where you would like the software to be on your computer.
+    (for example c:\\source or ~/source)
+  - `git clone git@github.com:danny6869/midi-ble-footswitch.git`
+- Open the Folder in the Arduino IDE
+  - Open the Arduino IDE
+  - Click File -> Open
+  - Navigate to the directory/folder where you cloned the project above
+  (c:\\source\\midi-ble-footswitch or ~/source/midi-ble-footswitch) and click
+  "Open"
+  - The code should now be visible in the IDE.
+- Test to make sure everything is setup properly
+  - In the Arduino IDE, click Sketch -> Verify/Compile (or hit CTRL-R)
+  - You should see the bottom black window have a title of "Compiling
+    Sketch", and a progress bar on the right.
+  - Once that is complete, if everything worked ok, the last lne you should
+    see is something similar to the following
+    `Sketch uses 23628 bytes (5%) of program storage space. Maximum is 409600 bytes.`
+  - If you do not see the above line, re-execute all of the steps in this
+    section.  (without this, you will not be able to properly program the board)
+
+#### Customizing the Code
+
+- (see "Customizing Your Device" above)
+
+#### Programming the Microcontroller Board
+
+1. Solder a 6 pin header strip onto the 6 debug pins found on the bottom
+edge of the sparkfun board
+2. If using the Gikfun programming board listed above, solder a 1 pin header
+to the terminal labeled 3.3v (as the sparkfun board needs 3.3v while
+programming)
+3. Use the 6 female-female jumper wires to match up the pins from USB to TTL programmer.  Basically the pin labels should all match, except the TX pin should be linked to the RX pin on the other board, and vice-versa.  Also, beware that the programming voltage of the sparkfun board is 3.3v, so we will not be connecting to the VCC pin on the programming board, but to the 3.3v pin we soldered onto it in the previous step.
+   - ![image](README/programmer-hookup.png)
+4. Plug the programming board into your computer using a USB cable (mini usb in the case of the Gikfun programming board)
+
+5. Configure the Programming Board in the Arduino IDE
+   - Open the Arduino IDE
+   - Click Tools -> Port and select the COM port of the programmer board (most likely the only COM port listed)
+   - Click Tools -> Programmer
+   - Select "AVRISP mkII"
+
+6. Get the Sparkfun BLE Board in bootloader/programming mode
+   - Push, and hold the pin 6 button
+   - Push and release the reset button
+   - Within a second or two you should see the onboard blue LED light flash a
+  sequence of long to short flashes.  If you see this, you are in
+  programming mode, and the device is ready to be flashed.
+   - If you DO NOT see that LED flashing sequence, there is probably some
+  sort of interference, or static happening.  IT TOOK ME FOREVER TO REALIZE
+  THAT MY FINGERS WERE CAUSING THE ISSUE.
+   - Helpful tips if you are having trouble getting the board into bootloader
+  mode
+     - Put the board(s) on non-conducting static-free surface, like a table.
+     - Use two toothpicks to press the Pin 6/Reset buttons.
+     - WARNING: FIGURING OUT THAT THIS WAS THE ISSUE FOR ME WAS THE SINGLE MOST FRUSTRATING PART OF THIS PROJECT.  BE PATIENT, AND FOLLOW THESE TIPS CAREFULLY TO SAVE YOURSELF FRUSTRATION!
+   - For more information about getting started with the Sparkfun BLE Board,
+  see the [Official Sparkfun BLE Breakout Board Hookup Guide](https://learn.sparkfun.com/tutorials/nrf52832-breakout-board-hookup-guide?_ga=2.235217601.1522060654.1581984917-256708523.1575427305)
+
+7. Flash the Sparkfun Board
+   - Open the Arduino IDE
+   - Open the midi-ble-footswitch code
+   - Click Sketch -> Upload (or CTRL-U)
+
+#### Testing / Debugging
+
+WARNING: Before continuing...If you are testing or debugging a fully assembled footswitch unit, unplug the LiPo battery before following these instructions.
+
+- Connect the programmer to the sparkfun board (using the jumper cables as described above)
+- Open the Arduino IDE
+- Click Tools -> Serial Monitor
+- In the window that pops up, ensure your communication settings in the bottom right corner are set properly for your programmer device (115200, 8, N, 1)
+- Connect the programmer to the computer using a USB cable
+- Once the unit boots (after a few seconds) you should start seeing debug output from the Sparkfun board.
 
 
 
