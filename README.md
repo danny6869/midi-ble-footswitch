@@ -49,7 +49,7 @@ These types of buttons send a CC ON when pressed.
   controllerObj->addCCButton(17, 16, MIDI_CHANNEL_1, MIDI_CC_CONTROL_22);
   controllerObj->addCCButton(19, 18, MIDI_CHANNEL_1, MIDI_CC_CONTROL_23);
 ```
-| Button # | Input Pin | LED Pin | Midi Channel | Midi Control # |
+| Button # | Button/Input Pin | LED/Output Pin | Midi Channel | Midi Control # |
 |:--------:|:---------:|:-------:|:------------:|:--------------:|
 | 1        | 13        | 12      | 1            | 20             |
 | 2        | 15        | 14      | 1            | 21             |
