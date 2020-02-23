@@ -121,6 +121,12 @@ to this project on thingiverse, or github.
 
 You can download the 3D STL files to print from thingiverse [here](https://www.thingiverse.com/thing:4134488).
 
+Any color of filament will do fine for the main top/bottom parts of the case.  For the pushbuttons, you should use some sort of translucent color with a 10% infill so that the LEDs will be able to shile through adequately.
+
+   - ![image](README/button-printed-translucent.png)
+   - ![image](README/button-lit-closeup.png)
+
+
 ### Parts List
 
 Listed here are all of the components and parts you will need to create a
@@ -169,7 +175,8 @@ surprises for the next person.
 - Recommended: small crimp connectors
   - 2 x 5 conductor connectors (for ever 2 buttons)
   - 1 x 2 conductor connector (for power)
-  - 1 x 2 conductor connector (for LiPo)
+  - 1 x 2-pin Male JST connector (for LiPo)
+    - [Available on Amazon](https://www.amazon.ca/dp/B07C4Y3ZFM)
   - 1 x 4 conductor connector (optional: for every 2 expression pedal ports)
 
 #### Programming Equipment
@@ -240,7 +247,9 @@ Of course you will need the following to piece this thing together.
     Sketch", and a progress bar on the right.
   - Once that is complete, if everything worked ok, the last lne you should
     see is something similar to the following
+    
     `Sketch uses 23628 bytes (5%) of program storage space. Maximum is 409600 bytes.`
+
   - If you do not see the above line, re-execute all of the steps in this
     section.  (without this, you will not be able to properly program the board)
 
@@ -252,12 +261,16 @@ Of course you will need the following to piece this thing together.
 
 1. Solder a 6 pin header strip onto the 6 debug pins found on the bottom
 edge of the sparkfun board
+
 2. If using the Gikfun programming board listed above, solder a 1 pin header
 to the terminal labeled 3.3v (as the sparkfun board needs 3.3v while
 programming)
+
 3. Use the 6 female-female jumper wires to match up the pins from USB to TTL programmer.  Basically the pin labels should all match, except the TX pin should be linked to the RX pin on the other board, and vice-versa.  Also, beware that the programming voltage of the sparkfun board is 3.3v, so we will not be connecting to the VCC pin on the programming board, but to the 3.3v pin we soldered onto it in the previous step.
    - ![image](README/programmer-hookup.png)
+
 4. Plug the programming board into your computer using a USB cable (mini usb in the case of the Gikfun programming board)
+   - (if you are programming a fully assembled unit, be sure to disconnect the LiPo battery)
 
 5. Configure the Programming Board in the Arduino IDE
    - Open the Arduino IDE
@@ -297,6 +310,13 @@ WARNING: Before continuing...If you are testing or debugging a fully assembled f
 - In the window that pops up, ensure your communication settings in the bottom right corner are set properly for your programmer device (115200, 8, N, 1)
 - Connect the programmer to the computer using a USB cable
 - Once the unit boots (after a few seconds) you should start seeing debug output from the Sparkfun board.
+
+#### Power Circuit Assembly
+
+
+#### Button Assembly
+
+![image](README/button-assembly-circuit.png)
 
 
 
