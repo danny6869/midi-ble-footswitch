@@ -1,3 +1,9 @@
+# WARNING!!!
+
+__ALL INFORMATION FOUND IN THIS README (AT THIS POINT) IS AN UNORGANIZED/INCOMPLETE WORK IN PROGRESS!!!  PLEASE TREAT IT AS SUCH UNTIL THIS WARNING SECTION IS REMOVED!__
+
+_(I'm working on it.  In the meantime, any input, or useful pull requests are welcome.  I will commit/merge to the master branch regularly, as progress is made, even if it is initially a giant mess)_
+
 # Wireless Midi BLE Footswitch System
 
 This software will allow you (with the proper hardware) to easily create a
