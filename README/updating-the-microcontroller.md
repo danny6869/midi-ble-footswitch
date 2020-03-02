@@ -8,19 +8,19 @@
   - CLick File -> Preferences
   - Under "Additional Board Manager URLs", enter
     `https://raw.githubusercontent.com/sparkfun/Arduino_Boards/nrf5/IDE_Board_Manager/package_sparkfun_index.json`
-    ![image](README/arduino-board-add.png)
+    ![image](arduino-board-add.png)
   - Click OK
 - Install the sparkfun driver
   - Click Tools -> Board -> Boards Manager
   - In the search box, enter `SparkFun nRF52 Boards`.
   - Select that item, and click INSTALL
-    ![image](README/arduino-nrf52-board-install.png)
+    ![image](arduino-nrf52-board-install.png)
   - BE PATIENT!  This takes a while, and will look like it's not doing
     anything for a while.  It took several minutes for me.
 - Select the Sparkfun Board in the IDE
   - Click Tools -> Board
   - Select "SparkFun nRF52832 Breakout" under the "Nordic Semiconductor nRF5 Boards" section.
-    ![image](README/arduino-board-selection.png)
+    ![image](arduino-board-selection.png)
 - Clone the software github
   - Drop down to a terminal or command prompt
   - Navigate to where you would like the software to be on your computer.
@@ -59,7 +59,7 @@ to the terminal labeled 3.3v (as the sparkfun board needs 3.3v while
 programming)
 
 3. Use the 6 female-female jumper wires to match up the pins from USB to TTL programmer.  Basically the pin labels should all match, except the TX pin should be linked to the RX pin on the other board, and vice-versa.  Also, beware that the programming voltage of the sparkfun board is 3.3v, so we will not be connecting to the VCC pin on the programming board, but to the 3.3v pin we soldered onto it in the previous step.
-   - ![image](README/programmer-hookup.png)
+   - ![image](programmer-hookup.png)
 
 4. Plug the programming board into your computer using a USB cable (mini usb in the case of the Gikfun programming board)
    - (if you are programming a fully assembled unit, be sure to disconnect the LiPo battery)

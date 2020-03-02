@@ -45,7 +45,7 @@ This type of control will transmit CC messages with a value of 0-127 depending o
 | 1       | 2         | 1            | 12             | Low to High | Linear     |
 | 2       | 3         | 2            | 13             | Low to High | Linear     |
 
-* See the [curve type reference chart](README/reference-pedal-curves.mdparts-list.md) for details on the different curve types available
+* See the [curve type reference chart](reference-pedal-curves.md) for details on the different curve types available
 
 _WARNING: If you are not going to be hooking up expression pedal jacks, then comment out all addExpressionPedal() lines in [midi-ble-footswitch.ino](midi-ble-footswitch.ino).  (if the jacks are not hooked up, then the signal for these will be reported as off/0 ... which will surely cause you problems)_
 
