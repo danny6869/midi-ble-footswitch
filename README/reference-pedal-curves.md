@@ -1,7 +1,7 @@
 # TODO/WIP: Pedal Curve Type Reference Chart
 
 
-##### Direction & Curve Types Constants
+#### Direction & Curve Types Constants
 
 | Curve Type                         | Direction                              | Curve Shape                                    |
 |:-----------------------------------|:--------------------------------------|:------------------------------------------------|
