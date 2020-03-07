@@ -1,4 +1,4 @@
-# Direction & Curve Types Constants
+# Direction & Curve Types
 
 When adding an expression pedal with a call to
 controllerObj->addNoteButton(), you can specify what direction the pedal
