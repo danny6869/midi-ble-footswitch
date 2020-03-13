@@ -1,15 +1,15 @@
-# TODO/WIP: Parts and Tools
+# Parts and Tools
 
 
-### 3D Printed Chassis/Case
+## 3D Printed Chassis/Case
 
 You can download the 3D STL files to print from thingiverse [here](https://www.thingiverse.com/thing:4134488).
 
 
-### Electronic Components
+## Electronic Components
 
 
-#### General/Shared Parts
+### General/Shared Parts
 
 - Stranded Wire
   - 24 gauge
@@ -26,13 +26,15 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
 - Small crimp connectors
   - 2 x 5-conductor connectors (for each pair of buttons)
   - 1 x 2-conductor connector (for power)
-  - 1 x 2-conductor connector (for LiPo)
   - 1 x 4-conductor connector (for each pair of expression pedal jacks)
+  - Assorted connectors [avalaible on Amazon](https://www.amazon.ca/gp/product/B0188DMF3A)
+  - 1 x 2-conductor (JST) connector (for LiPo)
+  - JST connectors [available on Amazon](https://www.amazon.ca/gp/product/B0188YKCFC)
 - 4 x Small zip-ties for internal wire management
 - 4 x Rubber stick-on anti-slip feet
 
 
-#### Microcontroller Board and Programmer
+### Microcontroller Board and Programmer
 - Microcontroller
   - Sparkfun BLE Breakout Board
     - Model: WRL-13990 (nRF52832)
@@ -45,7 +47,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - [Available on Amazon - FT232RL](https://www.amazon.ca/gp/product/B01JG8H5U4)
 
 
-#### Power/Charging Components
+### Power/Charging Components
 
 - LiPo Charging Circuit
   - 17mm x 27mm
@@ -61,7 +63,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - [Available on Amazon - B01N74TTW6](https://www.amazon.ca/gp/product/B01N74TTW6)
 
 
-#### Button Components
+### Button Components
 
 - 4 x Tactile switches
   - 6mm x 6mm x 5mm
@@ -71,7 +73,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
 - 4 x 330 ohm resistors
 
 
-#### Expression Pedal Ports (optional)
+### Expression Pedal Ports (optional)
 
 - 2 x 1/4" stereo jacks with ring shunt (one per expression pedal port)
   - [Available as Next-Gen Guitars](https://nextgenguitars.ca/products/switchcraft-14b-1-4-stereo-jack-with-tip-ring-shunts.html)
@@ -79,7 +81,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - WARNING: See the warning at the top of the main [README](../README.md) if you opt-out of having the expression pedal jacks in your configuration.
 
 
-### Tools
+## Tools
 
 - Soldering equipment
   - Soldering iron
