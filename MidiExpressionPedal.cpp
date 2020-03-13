@@ -15,6 +15,10 @@ MidiExpressionPedal::MidiExpressionPedal( MidiBLEDevice * cMidiBleDevice, int ci
   midi_control_number = cmidi_control_number;
   pedal_direction     = cpedal_direction;
   curve_type          = ccurve_type;
+  // Start at position 0 so that the shunt on the physical expression pedal jack will
+  // also report 0, ensuring no change is detected, and thereby not reporting expression
+  // pedal changes for a jack with nothing connected.  (it will work as normal as soon
+  // as the pedal is moved)
   last_midi_value     = 0;
 }
 
