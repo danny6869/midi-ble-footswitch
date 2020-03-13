@@ -24,7 +24,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - 1 x Green (charging indicator)
   - [Available on Amazon](https://www.amazon.ca/gp/product/B01LYLN77H)
 - Small crimp connectors
-  - 2 x 5-conductor connectors (for ever 2 buttons)
+  - 2 x 5-conductor connectors (for each pair of buttons)
   - 1 x 2-conductor connector (for power)
   - 1 x 2-conductor connector (for LiPo)
   - 1 x 4-conductor connector (for each pair of expression pedal jacks)
@@ -73,7 +73,9 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
 
 #### Expression Pedal Ports (optional)
 
-- Stereo 1/4" jacks (for expression pedal ports)
+- 2 x 1/4" stereo jacks with ring shunt (one per expression pedal port)
+  - [Available as Next-Gen Guitars](https://nextgenguitars.ca/products/switchcraft-14b-1-4-stereo-jack-with-tip-ring-shunts.html)
+  - The ring shunt is required do that the unit can know if an expression pedal is actually plugged in or not.  (so no expression pedal positions get reported when no pedal present)
   - WARNING: See the warning at the top of the main [README](../README.md) if you opt-out of having the expression pedal jacks in your configuration.
 
 

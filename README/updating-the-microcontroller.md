@@ -64,7 +64,7 @@ That will allow the on-board button, and LED to work as a midi button ahead of p
 edge of the sparkfun board
    - ![image](microcontroller-header.png)
 
-2. If using the Gikfun programming board listed above, solder a 1 pin header to the terminal labeled 3.3v (as the sparkfun board needs 3.3v while programming)
+2. If using the Gikfun programming board listed above, you will need to solder a 1 pin header to the terminal labeled 3.3v (as the sparkfun board needs 3.3v while programming)
 
 3. Use the 6 female-female jumper wires to match up the pins from USB to TTL programmer.  Basically the pin labels should all match, except the TX pin should be linked to the RX pin on the other board, and vice-versa.  Also, beware that the programming voltage of the sparkfun board is 3.3v, so we will not be connecting to the VCC pin on the programming board, but to the 3.3v pin we soldered onto it in the previous step.
    - ![image](programmer-hookup.png)
