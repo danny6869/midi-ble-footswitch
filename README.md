@@ -48,6 +48,7 @@ If you just want to play around with the software on the Sparkfun BLE Board, the
    - [Power/charging circuit (switch/battery/LEDs)](README/howto-solder-power-and-charging-circuit.md)
    - [Buttons (and LEDs)](README/howto-solder-button-circuit.md)
    - (optional) [Expression Pedal Jacks](README/howto-solder-expression-pedal-jacks.md)
+   - [Microcontroller Connectors](README/howto-solder-microcontroller-board.md)
 5. [Final Assembly](README/final-assembly.md)
 
 ## Resources & Thanks
