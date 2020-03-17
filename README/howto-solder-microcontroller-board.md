@@ -54,7 +54,7 @@ _BEFORE YOU PROCEED: If you haven't already done so, you probably want to solder
 
 - Connect the wires (by color as shown in the chart above) to the 5-pin female connector as shown in the following diagram...
 
-  ![microcontroller button/led connector](microcontroller-button-connector-pinout.png)
+  ![microcontroller button/led connector](microcontroller-button-connector-pinout-pair-1.png)
 
 - Solder the wires (by color as shown in the chart above) to the appropriate board contacts/pins.
 
@@ -71,7 +71,7 @@ _BEFORE YOU PROCEED: If you haven't already done so, you probably want to solder
   ![microcontroller button/led connector solder points](microcontroller-button-connector-solder-points-pair-1.png)
 
 
-### Connector for Buttons 1 & 2
+### Connector for Buttons 3 & 4
 
 - Connect the following wires to the 5-pin female connector, and BLE board as shown in this chart (more details and pictures can be found below that).
 
@@ -85,7 +85,7 @@ _BEFORE YOU PROCEED: If you haven't already done so, you probably want to solder
 
 - Connect the wires (by color as shown in the chart above) to the 5-pin female connector as shown in the following diagram...
 
-  ![microcontroller button/led connector](microcontroller-button-connector-pinout.png)
+  ![microcontroller button/led connector](microcontroller-button-connector-pinout-pair-2.png)
 
 - Solder the wires (by color as shown in the chart above) to the appropriate board contacts/pins.
 
@@ -111,7 +111,7 @@ _BEFORE YOU PROCEED: If you haven't already done so, you probably want to solder
   | 1             | Black       | Ground / V-               | GND                   |
   | 2             | Red         | 3.3v / V+                 | 3V3                   |
   | 3             | Yellow      | Expression Pedal 1 Signal | 02                    |
-  | 5             | Orange      | Expression Pedal 2 Signal | 03                    |
+  | 4             | Orange      | Expression Pedal 2 Signal | 03                    |
 
 - Connect the wires (by color as shown in the chart above) to the 4-pin female connector as shown in the following diagram...
 
