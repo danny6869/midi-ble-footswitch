@@ -13,8 +13,8 @@ Each button pair will need the following components to be soldered together.
   - 2 blue
   - 1 yellow
   - 1 orange
+  - _Before you start, dry-fit all button/LED pairs, and cut the 8 wires so that they reach where the sparkfun board will be in the chassis/case._
 - Heat-shrink tubing
-- _Before you start, dry-fit all button/LED pairs, and cut the 8 wires so that they reach where the sparkfun board will be in the chassis/case._
 
 ## Instructions
 

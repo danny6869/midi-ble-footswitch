@@ -24,14 +24,14 @@ Repeat the instructions below for each expression pedal jack pair.  (2 jacks / 1
 
 ### Solder the Jacks
 
-  1. Solder a long wire, and a short wire to the sleeve pin of the 1/4" jack.
+  1. Solder a regular length black wire, and a short black wire to the sleeve pin of the 1/4" jack.
 
-  2. Solder the other end of the short wire to the ring shunt pin of the 1/4" jack.
+  2. Solder the other end of the short black wire to the ring shunt pin of the 1/4" jack.
      - (this will ensure that if an expression pedal is not connected, no position changes will be reported --- this will prevent a volume, or effect being set to OFF when nothing is plugged into the jack)
 
-  3. Solder a long wire to the tip pin of the 1/4" jack.
+  3. Solder a red wire to the tip pin of the 1/4" jack.
 
-  4. Solder a long wire to the ring pin of the 1/4" jack.
+  4. Solder a yellow (orange for the 2nd jack) wire to the ring pin of the 1/4" jack.
 
   5. Repeat the above steps for the second expression pedal jack in the pair.
 
@@ -45,13 +45,13 @@ Repeat the instructions below for each expression pedal jack pair.  (2 jacks / 1
 
      ![expression pedal jack connector](expression-pedal-jack-pair-connector-pinout.png)
 
-     - Pin 1 connected to the TWO wires that lead to the ring pins of each jack.
+     - Pin 1 connected to the TWO black wires that lead to the ring pins of each jack.
 
-     - Pin 2 connected to the TWO wires that lead to the tip pins of each jack.
+     - Pin 2 connected to the TWO red wires that lead to the tip pins of each jack.
 
-     - Pin 3 to the wire that leads to the sleeve pin of the jack for expression pedal 1.
+     - Pin 3 to the yellow wire that leads to the sleeve pin of the jack for expression pedal 1.
 
-     - Pin 4 to the wire that leads to the sleeve pin of the jack for expression pedal 2.
+     - Pin 4 to the orange wire that leads to the sleeve pin of the jack for expression pedal 2.
 
 #### See the [soldering the microcontroller](howto-solder-microcontroller-board.md) page for information about the matching female connector, and what it hooks up to.
 
