@@ -6,7 +6,12 @@ Each pair of jacks need the following components to be soldered together.
 
 - 1 x 4 pin male connector (for each pair of jacks)
 - 2 x 1/4" stereo jacks with ring shunt (one per expression pedal port)
-- 4 pieces of 24 gauge wire (different colors if available)
+- 8 pieces of 24 gauge wire
+  - 2 black
+  - 2 black (SHORT - just long enough to jump across the two contacts on the jack - see below)
+  - 2 red
+  - 1 yellow
+  - 1 orange
   - _Before you start, dry-fit the jacks, and cut the 6 wires so that they will reach the sparkfun board will be in the chassis/case.  (the other two wires just need to be long enough to go from the shunt pin to the signal pin )_
 
 ## Instructions
