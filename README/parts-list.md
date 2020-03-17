@@ -16,21 +16,26 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - Optional: different colors
   - [Available on Amazon](https://www.amazon.ca/gp/product/B01KQ0D3M0)
   - WARNING: Use solid core wire at your own risk.  I did, and I regretted it every step of the way.
+
 - 5 x 330ohm Resistors
   - [Available on Amazon](https://www.amazon.ca/dp/product/B07FYJFLL8)
+
 - 6 x LEDs (3mm)
   - 4 x White (footswitch)
   - 1 x Red (power indicator)
   - 1 x Green (charging indicator)
   - [Available on Amazon](https://www.amazon.ca/gp/product/B01LYLN77H)
+
 - Small crimp connectors
-  - 2 x 5-conductor connectors (for each pair of buttons)
-  - 1 x 2-conductor connector (for power)
-  - 1 x 4-conductor connector (for each pair of expression pedal jacks)
   - Assorted connectors [avalaible on Amazon](https://www.amazon.ca/gp/product/B0188DMF3A)
-  - 1 x 2-conductor (JST) connector (for LiPo)
+    - 2 x sets of male/female 5-conductor connectors (for each pair of buttons)
+    - 1 x set of 2-conductor male/female connectors (for power)
+    - 1 x set of male/female 4-conductor connectors (for each pair of expression pedal jacks)
   - JST connectors [available on Amazon](https://www.amazon.ca/gp/product/B0188YKCFC)
+    - 1 x male 2-conductor (JST) connector (for LiPo)
+
 - 4 x Small zip-ties for internal wire management
+
 - 4 x Rubber stick-on anti-slip feet
 
 
@@ -52,11 +57,14 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
 - LiPo Charging Circuit
   - 17mm x 27mm
   - [Available on Amazon - 18650](https://www.amazon.ca/gp/product/B07CCGVJ79)
+
 - Power regulator circuit
   - [Available on Amazon - T64](https://www.amazon.ca/gp/product/B07L3RMJQB)
+
 - Pushbutton switch
   - 7mm x 7mm
   - [Available on Amazon](https://www.amazon.ca/gp/product/B06XR8SQG9)
+
 - LiPo Battery
   - 800maH (at maximum draw, about 8h, in reality at least double that)
   - 44mm x 24mm x 9mm
@@ -69,7 +77,9 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - 6mm x 6mm x 5mm
   - [Avaialble at Adafruit](https://www.adafruit.com/product/367)
   - [Available at Amazon](https://www.amazon.ca/dp/product/B078HL5CC7)
+
 - 4 x White 3mm LEDs
+
 - 4 x 330 ohm resistors
 
 
@@ -88,5 +98,7 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - Solder (good quality - for electronics)
   - Solder flux/paste (optional)
     - apply a small amount to wire/components before soldering
+- Multimeter/Tester
+
 - Thin (2-3mm?) heat-shrink tubing to keep things neat and tidy
 
