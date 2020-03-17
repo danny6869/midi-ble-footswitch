@@ -4,7 +4,7 @@
 
 Each pair of jacks need the following components to be soldered together.
 
-- 4 pin male connector (for each pair of jacks)
+- 1 x 4 pin male connector (for each pair of jacks)
 - 2 x 1/4" stereo jacks with ring shunt (one per expression pedal port)
 - 4 pieces of 24 gauge wire (different colors if available)
   - _Before you start, dry-fit the jacks, and cut the 6 wires so that they will reach the sparkfun board will be in the chassis/case.  (the other two wires just need to be long enough to go from the shunt pin to the signal pin )_
@@ -20,23 +20,32 @@ Repeat the instructions below for each expression pedal jack pair.  (2 jacks / 1
 ### Solder the Jacks
 
   1. Solder a long wire, and a short wire to the sleeve pin of the 1/4" jack.
+
   2. Solder the other end of the short wire to the ring shunt pin of the 1/4" jack.
      - (this will ensure that if an expression pedal is not connected, no position changes will be reported --- this will prevent a volume, or effect being set to OFF when nothing is plugged into the jack)
+
   3. Solder a long wire to the tip pin of the 1/4" jack.
+
   4. Solder a long wire to the ring pin of the 1/4" jack.
+
   5. Repeat the above steps for the second expression pedal jack in the pair.
 
 ### Connect wires to the 4-pin (male) connector
 
   1. Dry fit the 1/4" stereo jacks in the chassis/case.
+
   2. Group all of the wires together, and line them up to where the sparkfun board is inside the chassis/case.  Cut all wires where the shortest wire ends.
+
   3. Connect each wire to the connector as shown in the following diagram...
 
      ![expression pedal jack connector](expression-pedal-jack-pair-connector-pinout.png)
 
      - Pin 1 connected to the TWO wires that lead to the ring pins of each jack.
+
      - Pin 2 connected to the TWO wires that lead to the tip pins of each jack.
+
      - Pin 3 to the wire that leads to the sleeve pin of the jack for expression pedal 1.
+
      - Pin 4 to the wire that leads to the sleeve pin of the jack for expression pedal 2.
 
 #### See the [soldering the microcontroller](howto-solder-microcontroller-board.md) page for information about the matching female connector, and what it hooks up to.
