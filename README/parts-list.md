@@ -99,6 +99,8 @@ You can download the 3D STL files to print from thingiverse [here](https://www.t
   - Solder flux/paste (optional)
     - apply a small amount to wire/components before soldering
 - Multimeter/Tester
+- Hot glue gun
+  - Used to secure components (optional)
 
 - Thin (2-3mm?) heat-shrink tubing to keep things neat and tidy
 
