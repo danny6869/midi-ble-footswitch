@@ -8,15 +8,15 @@ Some of the pictures you will see below will be a little different than what was
 
 - External
 
-  ![final footswitch top](final-footswitch-top.png)
+  ![final footswitch top](final-footswitch-top.jpg)
 
 - Back of Unit
 
-  ![final footswitch back](final-footswitch-back.png)
+  ![final footswitch back](final-footswitch-back.jpg)
 
 - Internal
 
-  ![final footswitch internal](final-footswitch-internal.png)
+  ![final footswitch internal](final-footswitch-internal.jpg)
 
 
 ## Instructions
