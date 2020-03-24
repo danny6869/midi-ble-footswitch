@@ -77,3 +77,18 @@ century (with the [Bluetooth LE MIDI Specification](https://www.midi.org/specifi
 - Website: https://www.desmos.com/calculator
 - I used this online tool quite a bit during the creation of this readme.
 
+## Note from the Creator
+
+I strontly believe that things like this should be freely available on the internet, but I also believe that appreciation should be shown if you get use out of it, or find it useful at all.
+
+If you feel so inclined, go click "like" on the thingiverse page (at the very least), or make a small donation...
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_midi-ble-donate">
+<input type="hidden" name="cmd" value="_s-xclick" />
+<input type="hidden" name="hosted_button_id" value="QGM9ZGJDVFDEA" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_CA/i/scr/pixel.gif" width="1" height="1" />
+</form>
+
+...thanks, and happy printing/hacking!!!
+
