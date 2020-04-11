@@ -1,3 +1,7 @@
+# WARNING: Things are a changin'
+
+This current project is all based around a sparkfun BLE breakout board, which is a fine device, however, to make this footswitch work, there are too many parts that have to be strung together, so I am in the process of geting some new hardware which will hopefully make all of this MUCH SIMPLER to build.  It will mean that this software will need to change for the new board configuration.  Stay tuned.  Hopefully the new hardware will be here in the next week or two, so I can finalize the new design, and simplified (complete) instructions shortly after.  Sorry about how long this is taking.  Most of the time at this point has been in getting a new 3D model for the chassis worked out.
+
 # Wireless Midi BLE Footswitch System
 
 This software will allow you (with the proper hardware) to easily create a fully working wireless Midi BLE pedal/footswitch system.  Out of the box, this software is configured for four footswitches, and two expression pedals.
