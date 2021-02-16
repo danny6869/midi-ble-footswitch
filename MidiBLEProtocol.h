@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BLEPeripheral.h>
 #include <Arduino.h>
 
 #ifndef DMIDIBLEUTIL_H
@@ -392,19 +391,5 @@
 #define MIDI_NOTE_F9    125
 #define MIDI_NOTE_Gb9   126
 #define MIDI_NOTE_G9    127
-
-struct MidiBlePacket {
-  byte *data;
-  int size;
-};
-
-class MidiBLEProtocol {
-  private:
-    static byte *generateHeaderBytes();
-  public:
-    static MidiBlePacket *generateNoteOnOffPacket(int channelNumber, int noteNumber, bool onOff);
-    static MidiBlePacket *generateControlChangePacket(int channelNumber, int controlNumber, int controlPosition);
-    static void logMidiPacket(MidiBlePacket * packet);
-};
 
 #endif
