@@ -1,9 +1,6 @@
 #pragma once
-#include "MidiBLEProtocol.h"
-#include "MidiBLEDevice.h"
 #include "IMidiLightedButton.h"
-#include "MidiCCButton.h"
-#include "MidiNoteButton.h"
+#include "MidiBLEDevice.h"
 #include "MidiExpressionPedal.h"
 
 #ifndef DMIDICONTROLLER_H
