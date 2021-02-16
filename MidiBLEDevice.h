@@ -1,5 +1,5 @@
-#include <BLEPeripheral.h>
-#include "MidiBLEProtocol.h"
+#include <bluefruit.h>
+#include <MIDI.h>
 
 #ifndef DMIDIBLEDEVICE_H
 #define DMIDIBLEDEVICE_H
@@ -9,18 +9,13 @@ class MidiBLEDevice {
   private:
 
     // Setup our bluetooth device according to the MIDI BLE spec...
-    BLEPeripheral *blePeripheral;
-    BLEService *bleService;
-    BLEDescriptor *bleDescriptor;
-    BLECharacteristic *bleCharacteristic;
-
-    void sendMidiBlePacket( MidiBlePacket *packet );
 
   public:
 
     char *deviceName;
 
     MidiBLEDevice( char *cDeviceName );
+    void startBLEAdvertising();
     void loop();
 
     bool hasSubscriberConnected();

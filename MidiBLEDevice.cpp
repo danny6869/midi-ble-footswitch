@@ -1,63 +1,106 @@
-#include <BLEPeripheral.h>
+#include <bluefruit.h>
+#include <MIDI.h>
 #include "MidiBLEDevice.h"
 
 // A flag to keep track of whether or not we currently have a MIDI BLE subscriber connected, and waiting...
 static bool _hasSubscriberConnected;
 
-void BLESubscribedCallback(BLECentral& central, BLECharacteristic& characteristic) {
+// Bluefruit feather nrf52 BLE setup...
+BLEDis bledis;
+BLEMidi blemidi;
+
+// Create a new instance of the Arduino MIDI Library,
+// and attach BluefruitLE MIDI as the transport.
+MIDI_CREATE_BLE_INSTANCE(blemidi);
+
+void BLESubscribedCallback(uint16_t conn_handle) {
   // Non class-method callback to track subscriber status...
   Serial.println("MIDI BLE subscriber connected");
   _hasSubscriberConnected = true;
 }
 
-void BLEUnsubscribedCallback(BLECentral& central, BLECharacteristic& characteristic) {
+void BLEUnsubscribedCallback(uint16_t conn_handle, uint8_t reason) {
   // Non class-method callback to track subscriber status...
   Serial.println("MIDI BLE subscriber disconnected");
   _hasSubscriberConnected = false;
+}
+
+void MidiBLEDevice::startBLEAdvertising(void)
+{
+
+  // Set General Discoverable Mode flag
+  Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
+
+  // Advertise TX Power
+  Bluefruit.Advertising.addTxPower();
+
+  // Advertise BLE MIDI Service
+  Bluefruit.Advertising.addService(blemidi);
+
+  // Secondary Scan Response packet (optional)
+  // Since there is no room for 'Name' in Advertising packet
+  Bluefruit.ScanResponse.addName();
+
+  /* Start Advertising
+   * - Enable auto advertising if disconnected
+   * - Interval:  fast mode = 20 ms, slow mode = 152.5 ms
+   * - Timeout for fast mode is 30 seconds
+   * - Start(timeout) with timeout = 0 will advertise forever (until connected)
+   *
+   * For recommended advertising interval
+   * https://developer.apple.com/library/content/qa/qa1931/_index.html
+   */
+  Bluefruit.Advertising.restartOnDisconnect(true);
+  Bluefruit.Advertising.setInterval(32, 244);    // in unit of 0.625 ms
+  Bluefruit.Advertising.setFastTimeout(30);      // number of seconds in fast mode
+  Bluefruit.Advertising.start(0);                // 0 = Don't stop advertising after n seconds
+
 }
 
 MidiBLEDevice::MidiBLEDevice( char *cDeviceName ) {
 
   deviceName = cDeviceName;
 
-  blePeripheral = new BLEPeripheral();
+  // Config the peripheral connection with maximum bandwidth
+  // more SRAM required by SoftDevice
+  // Note: All config***() function must be called before begin()
+  Bluefruit.configPrphBandwidth(BANDWIDTH_MAX);
 
   Serial.println("Starting Midi BLE device");
 
-  // Setup our bluetooth device according to the MIDI BLE spec...
-  bleService = new BLEService("03B80E5A-EDE8-4B33-A751-6CE34EC4C700");
-  bleCharacteristic = new BLECharacteristic("7772E5DB-3868-4112-A1A9-F2669D106BF3", BLERead | BLEWriteWithoutResponse | BLENotify, 20 );
-  // Set the descriptor/UUID...
-  // XXX - UUID here instead!?
-  bleDescriptor = new BLEDescriptor("2902", 0);
-  //BLEDescriptor descriptor = BLEDescriptor("a3c1291d-0c23-430f-9801-ab46897bddf6", 0);
+  Bluefruit.begin();
+  // Keep it short!  < 20 chars
+  Bluefruit.setName(deviceName);
+  Bluefruit.setTxPower(4);    // Check bluefruit.h for supported values
 
-  // Setup the name of the device (for pairing)...
-  // local name sometimes used by central...
-  blePeripheral->setLocalName(deviceName);
-  // device name sometimes used by central...
-  blePeripheral->setDeviceName(deviceName);
+  // Setup the on board blue LED to be enabled on CONNECT
+  Bluefruit.autoConnLed(true);
 
-  // Advertise the MIDI UUID...
-  blePeripheral->setAdvertisedServiceUuid(bleService->uuid());
+  // Set the connect/disconnect callbacks for tracking state
+  Bluefruit.Periph.setConnectCallback(BLESubscribedCallback);
+  Bluefruit.Periph.setDisconnectCallback(BLEUnsubscribedCallback);
 
-  // add attributes (services, characteristics, descriptors) to the peripheral...
-  blePeripheral->addAttribute(*bleService);
-  blePeripheral->addAttribute(*bleCharacteristic);
-  blePeripheral->addAttribute(*bleDescriptor);
-
+/*  XXX - characteristic...set read/write modes
+ *  XXX - one of these may be the reson things aren't wuite right with the HyVibe system...look closer
+  Bluefruit.Characteristic.setProperties(CHR_PROPS_READ | CHR_PROPS_WRITE_WO_RESP | CHR_PROPS_NOTIFY);
   // set initial value/data
-  bleCharacteristic->setValue(0);
+  Bluefruit.Characteristic.setValue(0);
+  // setautoread might be something we want?!
+  blemidi->autoMIDIread();
+*/
 
-  // Setup our callbacks (event handlers)...
-  bleCharacteristic->setEventHandler(BLESubscribed, &BLESubscribedCallback);
-  bleCharacteristic->setEventHandler(BLEUnsubscribed, &BLEUnsubscribedCallback);
-  //bleCharacteristic->setEventHandler(BLEWritten, onWrittenCallback);
-  //bleCharacteristic->setEventHandler(BLEConnected, onConnectedCallback);
-  //bleCharacteristic->setEventHandler(BLEDisconnected, onDisconnectedCallback);
+  // Configure and Start Device Information Service
+  bledis.setManufacturer("Adafruit");
+  bledis.setModel("Feather52");
+  bledis.begin();
 
-  // Start up our peripheral, as it is ready to go...
-  blePeripheral->begin();
+
+  // Initialize MIDI, and listen to all MIDI channels
+  // This will also call blemidi service's begin()
+  MIDI.begin(MIDI_CHANNEL_OMNI);
+
+  // Set up and start advertising
+  this->startBLEAdvertising();
 
   Serial.println("Started Midi BLE device");
 
@@ -68,26 +111,7 @@ bool MidiBLEDevice::hasSubscriberConnected() {
 }
 
 void MidiBLEDevice::loop() {
-
-  // TODO: Add logging that makes sense below...
-
-  // Do this so the BLECentral can do its thing, otherwise, the BLE device will not work properly...
-  BLECentral central = blePeripheral->central();
-  if (central) {
-    // Serial.println("central");
-    if (central.connected() ) {
-      // Serial.println("  connected");
-    } else {
-      // Serial.println("  not connected");
-    }
-  } else {
-    // Serial.println("no central");
-  }
-
-}
-
-void MidiBLEDevice::sendMidiBlePacket( MidiBlePacket *packet ) {
-  bleCharacteristic->setValue( (const unsigned char *)packet->data, packet->size );
+  // Currently a no-op for the bluefruit feather hardware...
 }
 
 void MidiBLEDevice::sendMIDINoteOn( int midi_channel, int midi_note ) {
@@ -99,9 +123,8 @@ void MidiBLEDevice::sendMIDINoteOn( int midi_channel, int midi_note ) {
   Serial.print(";  Position: ON");
   Serial.println();
   
-  MidiBlePacket *packet = MidiBLEProtocol::generateNoteOnOffPacket( midi_channel, midi_note, true );
-  MidiBLEProtocol::logMidiPacket( packet );
-  sendMidiBlePacket( packet );
+  MIDI.sendNoteOn(midi_note, 127, midi_channel);
+
 }
 
 void MidiBLEDevice::sendMIDINoteOff( int midi_channel, int midi_note ) {
@@ -113,9 +136,8 @@ void MidiBLEDevice::sendMIDINoteOff( int midi_channel, int midi_note ) {
   Serial.print(";  Position: OFF");
   Serial.println();
 
-  MidiBlePacket *packet = MidiBLEProtocol::generateNoteOnOffPacket( midi_channel, midi_note, false );
-  MidiBLEProtocol::logMidiPacket( packet );
-  sendMidiBlePacket( packet );
+  MIDI.sendNoteOff(midi_note, 127, midi_channel);
+
 }
 
 void MidiBLEDevice::sendMIDIControlChange( int midi_channel, int midi_control_number, int midi_control_position ) {
@@ -128,7 +150,6 @@ void MidiBLEDevice::sendMIDIControlChange( int midi_channel, int midi_control_nu
   Serial.print(midi_control_position);
   Serial.println();
 
-  MidiBlePacket *packet = MidiBLEProtocol::generateControlChangePacket( midi_channel, midi_control_number, midi_control_position );
-  MidiBLEProtocol::logMidiPacket( packet );
-  sendMidiBlePacket( packet );
+  MIDI.sendControlChange(midi_control_number, midi_control_position, midi_channel);
+
 }
