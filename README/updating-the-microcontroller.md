@@ -2,30 +2,33 @@
 
 This page will get you up and running with the Arduino IDE, and getting your board programmed, and configured.
 
+## Setting up the Arduino IDE for the Adafruit Bluefruit Feather nRF52832 Board
 
-## Setting up the Arduino IDE
+Follow these instructions to get the arduino IDE setup to be able to compile the software for use on the adafruit feather BLE board.
 
-Follow these instructions to get the arduino IDE setup to be able to compile the software for use on the Sparkfun BLE Breakout Board.
-
-- Download the Arduino IDE [here](https://www.arduino.cc/en/main/software)
+- Download the Arduino IDE [here](https://www.arduino.cc/en/main/software) (>= v1.6.12)
 - Open the Arduino IDE
-- Add the sparkfun repository
+- Add the adarfuit feather repository
   - Click `File` -> `Preferences`
   - Under `Additional Board Manager URLs`, enter
-    `https://raw.githubusercontent.com/sparkfun/Arduino_Boards/nrf5/IDE_Board_Manager/package_sparkfun_index.json`
-    ![image](arduino-board-add.png)
+    `https://www.adafruit.com/package_adafruit_index.json`
+    ![image](arduino-adafruit-board-add.png)
   - Click `OK`
-- Install the sparkfun driver
-  - Click `Tools` -> `Board` -> `Boards Manager`
-  - In the search box, enter `SparkFun nRF52 Boards`.
+- Install the bluefruit feather drivers
+  - Click `Tools` -> `Board: *` -> `Boards Manager`
+  - In the search box, enter `Adafruit nRF52`
   - Select that item, and click `INSTALL`
-    ![image](arduino-nrf52-board-install.png)
-  - BE PATIENT!  This takes a while, and will look like it's not doing
-    anything for a while.  It took several minutes for me.
-- Select the Sparkfun Board in the IDE
-  - Click `Tools` -> `Board`
-  - Select `"SparkFun nRF52832 Breakout"` under the `"Nordic Semiconductor nRF5 Boards"` section.
-    ![image](arduino-board-selection.png)
+    ![image](arduino-adafruit-nrf52-board-install.png)
+- Select the Adafruit Feather boarr in the IDE
+  - Click `Tools` -> `Board: *` -> `Adafruit NRF52 Boards` -> `Adafruit Feather nRF52832`
+    ![image](arduino-adafruit-board-selection.png)
+- Install the standard arduino MIDI library
+  - Click `Tools` -> `Manage Libraries`
+  - Enter/find `MIDI Library` in the list
+  - Click the drop-down, and select v4.3.1
+    - (as of the time of this writing the adafruit nrf52 libraries are only
+      compatible with pre v5 versions of the midi library)
+  - Clik `Install`
 - Clone the software github
   - Drop down to a terminal or command prompt
   - Navigate to where you would like the software to be on your computer.
